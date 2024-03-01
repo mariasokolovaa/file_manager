@@ -2,7 +2,7 @@
 import os
 import shutil
 
-with open("settings.txt", "r") as settings:
+with open("ss.txt", "r") as settings:
     dir = settings.read()
     start_dir = os.path.dirname(os.path.dirname(dir))
 # Функция для создания папки
