@@ -2,7 +2,7 @@
 import os
 import shutil
 
-with open("ss.txt", "r") as settings:
+with open("settings.txt", "r") as settings:
     dir = settings.read()
     start_dir = os.path.dirname(os.path.dirname(dir))
 # Функция для создания папки
@@ -10,15 +10,15 @@ def create_folder(folder_name):
     try:
         os.mkdir((os.path.join(dir, folder_name)))
         print(f"Folder {folder_name} created successfully.")
-    except FileExistsError:
-        print('File already exists')
+    except:
+        print('Folder already exists')
    
 # Функция для удаления папки
 def delete_folder(folder_name):
     try:
         shutil.rmtree(os.path.join(dir, folder_name))
         print(f"Folder {folder_name} deleted successfully.")
-    except FileNotFoundError:
+    except :
         print(f"Folder {folder_name} does not exist.")
 
 # Функция для перемещения между папками
@@ -30,13 +30,12 @@ def change_directory(folder_name):
         print(f"Moved to folder {folder_name}.")
         print(os.path.dirname(dir))
     else:
-        print("Directory does not exist.")
+        print("Directory doesn't exist.")
 
 # Функция для перемещения на уровень вверх
 def move_up():
     global dir
     parent_dir = os.path.dirname(dir)
-    print(parent_dir)
     if parent_dir!=start_dir :
         dir = parent_dir
         print(f"Moved up to {os.path.basename(dir)}.")
@@ -49,7 +48,7 @@ def create_file(file_name):
         with open(os.path.join(dir, file_name), "w"):
             pass
         print(f"File {file_name} created successfully.")
-    except FileExistsError:
+    except:
         print(f"File {file_name} already exists.")
 
 # Функция для записи текста в файл
@@ -58,7 +57,7 @@ def write_to_file(file_name, text):
         with open(os.path.join(dir, file_name), "w") as file:
             file.write(text)
         print(f"Text was added to {file_name}.")
-    except FileNotFoundError:
+    except:
         print(f"File {file_name} not found.")
 
 # Функция для просмотра содержимого файла
@@ -66,7 +65,7 @@ def view_file(file_name):
     try:
         with open(os.path.join(dir, file_name), "r") as file:
             print(file.read())
-    except FileNotFoundError:
+    except:
         print(f"File {file_name} not found.")
 
 # Функция для удаления файла
@@ -74,7 +73,7 @@ def delete_file(file_name):
     try:
         os.remove(os.path.join(dir, file_name))
         print(f"File {file_name} was deleted.")
-    except FileNotFoundError:
+    except:
         print(f"File {file_name} was not found.")
 
 # Функция для копирования файла
@@ -91,7 +90,7 @@ def move_file(file_name, new_dir):
         shutil.move(os.path.join(dir, file_name), os.path.join(dir, new_dir))
         print(f"File {file_name} was moved to {new_dir}.")
     except FileNotFoundError:
-        print(f"File {file_name} wasn't found.")
+        print(f"File {file_name} not found.")
 
 # Функция для переименования файла
 def rename_file(current_file, new_file):
@@ -99,26 +98,25 @@ def rename_file(current_file, new_file):
         os.rename(os.path.join(dir, current_file), os.path.join(dir, new_file))
         print(f"File {current_file} renamed to {new_file}.")
     except FileNotFoundError:
-        print(f"File {current_file} not found.")
+        print(f"File {current_file}  not found.")
 
 # Основной цикл программы
-print("Current Directory:", dir)
-print("File Manager Menu:")
-print("1. Create Folder")
-print("2. Delete Folder")
-print("3. Change Directory")
-print("4. Move Up")
-print("5. Create File")
-print("6. Write to File")
-print("7. Read File")
-print("8. Delete File")
-print("9. Copy File")
-print("10. Move File")
-print("11. Rename File")
-print("12. Exit")
+print("Current Directory:", dir,
+      "\nFile Manager Menu:\n"
+      "1. Create Folder\n"
+      "2. Delete Folder\n"
+      "3. Change Directory\n"
+      "4. Move Up\n"
+      "5. Create File\n"
+      "6. Write to File\n"
+      "7. Read File\n"
+      "8. Delete File\n"
+      "9. Copy File\n"
+      "10. Move File\n"
+      "11. Rename File\n"
+      "12. Exit")
+
 while True:
-
-
     choice = input("Enter your choice: ")
     if choice == "1":
         folder_name = input("Enter folder name: ")
@@ -157,9 +155,9 @@ while True:
         new_file = input("Enter new filename: ")
         rename_file(current_file, new_file)
     elif choice == "12":
-        print("Exiting File Manager.")
+        print("Exiting File Manager")
         break
     else:
-        print("Invalid choice. Please try again.")
+        print("Invalid choice. Try again.")
     
-    input("Press Enter to continue...")
+    input("Press to continue...")
